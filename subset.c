@@ -17,7 +17,7 @@ void subsetSum(int subset, int k, int r){
     included[k] = 1;
 
     if(set[k]+subset == max){
-        printf("\nSubset %d",subset_count++);
+        printf("\nSubset %d : ",subset_count++);
         for(int i=1; i<=k;i++){
             if(included[i])
                 printf("%d\t",set[i]);
