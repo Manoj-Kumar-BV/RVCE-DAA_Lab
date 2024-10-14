@@ -1,80 +1,49 @@
 #include<stdio.h>
-
+#include<stdlib.h>
 #define INF 999
-void dijs(int n, int source, int cost[10][10], int distance[], int predecessor[]){
-    int v, count, visited[10]={0},min;
 
-    for(int i=0; i<n; i++){
-        distance[i] = cost[source][i];
-        if(distance[i] != INF)
-            predecessor[i] = source;
+void dijkstra(int cost[10][10], int n, int source, int v[10], int d[10]){
+  int i,j,u,min;
+  for(i=1;i<=n;i++){
+    min = INF;
+    for(j=1;j<=n;j++){
+      if(v[j] == 0 && d[j] < min){
+        min = d[j];
+        u = j;
+      }
     }
-
-    visited[source] = 1;
-    distance[source] = 0;
-    predecessor[source] = -1;
-    count = 1;
-
-    while(count < n){
-        min = INF;
-        for(int w =0; w<n; w++){
-            if(!visited[w] && distance[w]<min){
-                min = distance[w];
-                v = w;
-            }
-        }
-
-        visited[v] = 1;
-        count++;
-
-        for(int w=0; w<n; w++){
-            if(!visited[w] && distance[v]+cost[v][w]<distance[w]){
-                distance[w] = distance[v]+cost[v][w];
-                predecessor[w]=v;
-            }
-        }
+    v[u] = 1;
+    for(j=1;j<=n;j++){
+      if(v[j] == 0 && (d[j] > (d[u] + cost[u][j])))
+        d[j] = d[u] + cost[u][j];
     }
+  }
 }
 
 int main(){
-    int n,source,distance[10], cost[10][10],predecessor[10];
-
-    printf("Enter number of vertices: \n");
-    scanf("%d",&n);
-
-    printf("Enter the cost of the matrix: \n");
-    for(int i=0; i<n; i++){
-        for(int j=0;j<n;j++){
-            scanf("%d",&cost[i][j]);
-            if(cost[i][j] == 0)
-                cost[i][j] = INF;
-        }
+  int cost[10][10], n,sourceNode,v[10],d[10];
+  int i,j;
+  printf("\n Enter the no. of nodes : \n");
+  scanf("%d",&n);
+  
+  printf("\n Enter the cost adjacency matrix 999 if they are not directly connected : \n");
+  for(i=1;i<=n;i++){
+    for(j=1;j<=n;j++){
+      scanf("%d",&cost[i][j]);
     }
-
-    printf("Enter source vertex (0 indexed) : \n");
-    scanf("%d",&source);
-
-    dijs(n,source,cost,distance,predecessor);
-
-    printf("\n Shortest paths from node %d are: \n",source);
-    printf("\nNode\tDistance\tPath\n");
-
-    for(int i=0; i<n; i++){
-        if(i != source){
-            printf("%d\t%d", i, distance[i]);
-            printf("\t\t%d",i);
-
-            int j=i;
-
-            do{
-                j = predecessor[j];
-                printf("<-%d",j);
-            }while(j != source);
-
-            printf("\n");
-        }
-    }
-    printf("\n");
-
-    return 0;
+  }
+  
+  printf("\n Enter the sourcenode (1 to %d) : \n",n);
+  scanf("%d",&sourceNode);
+  
+  for(i=1;i<=n;i++){
+    d[i] = cost[sourceNode][i];
+    v[i] = 0;
+  }
+  dijkstra(cost,n,sourceNode,v,d);
+  
+  printf("\n Shortest path from SourceNode %d is : \n",sourceNode);
+  for(i=1;i<=n;i++)
+    printf("%d --> %d = %d\n",sourceNode,i,d[i]);
+  return 0;
 }
