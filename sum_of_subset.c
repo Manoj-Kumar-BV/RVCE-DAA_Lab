@@ -25,9 +25,9 @@ int main(){
   int i,n,sum=0;
   printf("\n Enter the no. of values: \n");
   scanf("%d",&n);
-  printf("\n Enter the %d values in ascending order : \n");
+  printf("\n Enter the %d values in ascending order : \n",n);
   for(i=1;i<=n;i++){
-    scanf("%d",subset[i]);
+    scanf("%d",&subset[i]);
     sum += subset[i];
   }
   printf("\n Enter the target value : \n");
