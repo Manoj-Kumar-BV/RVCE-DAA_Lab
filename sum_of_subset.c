@@ -13,9 +13,9 @@ void sum_subset(int s, int k, int total){
     }
     printf("\n");
   }
-  else if(s+subset[k]+subsetk+1] <= target)
+  else if(s+subset[k]+subset[k+1] <= target)
     sum_subset(s+subset[k],k+1,total-subset[k]);
-  if((s+total-subset[k] >= match) && (s+subset[k+1] <= match)){
+  if((s+total-subset[k] >= target) && (s+subset[k+1] <= target)){
     x[k] == 0;
     sum_subset(s,k+1,total-subset[k]);
   }
@@ -33,7 +33,7 @@ int main(){
   printf("\n Enter the target value : \n");
   scanf("%d",&target);
 
-  if(sum<match||subset[1]>match)
+  if(sum<target||subset[1]>target)
     printf("\n No Solution\n");
   sum_subset(0,1,sum);
   return 0;
