@@ -16,7 +16,7 @@ void sum_subset(int s, int k, int total){
   else if(s+subset[k]+subset[k+1] <= target)
     sum_subset(s+subset[k],k+1,total-subset[k]);
   if((s+total-subset[k] >= target) && (s+subset[k+1] <= target)){
-    x[k] == 0;
+    x[k] = 0;
     sum_subset(s,k+1,total-subset[k]);
   }
 }
