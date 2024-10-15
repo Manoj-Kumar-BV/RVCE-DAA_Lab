@@ -30,7 +30,7 @@ int main(){
   printf("\n Enter the adjacency matrix -1 for no direct path : \n");
   for(i=0;i<n;i++){
     for(j=0;j<n;j++){
-      scanf("%d",graph[i][j]);
+      scanf("%d",&graph[i][j]);
       if(graph[i][j] == -1 && i != j)
         graph[i][j] = INF;
     }
