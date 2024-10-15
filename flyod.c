@@ -25,7 +25,7 @@ int main(){
 
   int **graph = (int **)malloc(n * sizeof(int *));
   for(i=0;i<n;i++)
-    grpah[i] = (int *)malloc(n * sizeof(int));
+    graph[i] = (int *)malloc(n * sizeof(int));
 
   printf("\n Enter the adjacency matrix -1 for no direct path : \n");
   for(i=0;i<n;i++){
